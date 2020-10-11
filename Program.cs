@@ -347,7 +347,7 @@ namespace ConsoleApplication2
         }
         static int countODiagonal2()
         {
-            return (row1[2] == 1 ? 1 : 0) + (row2[1] == 1 ? 1 : 0) + (row3[0] == 1 ? 1 : 0);
+            return (row1[2] == 2 ? 1 : 0) + (row2[1] == 2 ? 1 : 0) + (row3[0] == 2 ? 1 : 0);
         }
         static int countXDiagonal2() { 
             return (row1[2]==1?1:0)+(row2[1]==1?1:0)+(row3[0]==1?1:0);
