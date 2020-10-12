@@ -13,6 +13,7 @@ namespace ConsoleApplication2
         static int[] row3 = new int[3];
         static bool endGame = false;
         static bool isFirstMove = true;
+        static bool isSecondMove = true;
         static void print(int n) {
             switch (n) { 
                 case 0:
@@ -25,6 +26,12 @@ namespace ConsoleApplication2
                     Console.Write(" O");
                     break;
             }
+        }
+        static bool isValidNumber(string s) {
+            for (int i = 0; i < s.Length; i++)
+                if (s[i] > '9' || s[i] < '0')
+                    return false;
+            return true;
         }
         static void print(int[] arr) {
             for (int i = 0; i < arr.Length; i++)
@@ -383,7 +390,7 @@ namespace ConsoleApplication2
                 }
                 
             }else if (findGoodColumn() == -1 && findGoodRow() == -1 && findGoodRowPlayer() == -1 && findGoodColumnPlayer() == -1 && (countXDiagonal1() != 2 || findEmptyDiagonal1() == -1)
-                && (countODiagonal1() != 2 || findEmptyDiagonal1() == -1) && (countXDiagonal2() != 2 || findEmptyDiagonal2() == -1) && (countODiagonal2() != 2 || findEmptyDiagonal2() == -1))
+                && (countODiagonal1() != 2 || findEmptyDiagonal1() == -1) && (countXDiagonal2() != 2 || findEmptyDiagonal2() == -1) && (countODiagonal2() != 2 || findEmptyDiagonal2() == -1)&&isSecondMove==false)
             {
                 computerTurnRandom();
             }
@@ -409,7 +416,7 @@ namespace ConsoleApplication2
                             column = getEmptyColumnInRow(row3);
                             break;
                     }
-
+                    
                 }
                 else
                 {
@@ -428,7 +435,7 @@ namespace ConsoleApplication2
                         row3[column - 1] = 2;
                         break;
                 }
-
+                isSecondMove = false;
             }
             else if (countODiagonal1() == 2 && findEmptyDiagonal1() != -1)
             {
@@ -447,7 +454,7 @@ namespace ConsoleApplication2
                         row3[column - 1] = 2;
                         break;
                 }
-
+                isSecondMove = false;
             }
             else if (countODiagonal2() == 2 && findEmptyDiagonal2() != -1)
             {
@@ -466,6 +473,7 @@ namespace ConsoleApplication2
                         row3[0] = 2;
                         break;
                 }
+                isSecondMove = false;
             }
             else if (findGoodRowPlayer() != -1 || findGoodColumnPlayer() != -1)
             {
@@ -507,6 +515,7 @@ namespace ConsoleApplication2
                         row3[column - 1] = 2;
                         break;
                 }
+                isSecondMove = false;
             }
             else if (countXDiagonal1() == 2 && findEmptyDiagonal1() != -1)
             {
@@ -525,6 +534,7 @@ namespace ConsoleApplication2
                         row3[column - 1] = 2;
                         break;
                 }
+                isSecondMove = false;
             }
             else if (countXDiagonal2() == 2 && findEmptyDiagonal2() != -1)
             {
@@ -543,25 +553,47 @@ namespace ConsoleApplication2
                         row3[0] = 2;
                         break;
                 }
+                isSecondMove = false;
+            }
+            else if (isSecondMove == true)
+            {
+                if (row1[0] == 0)
+                    row1[0] = 2;
+                else if (row1[2] == 0)
+                    row1[2] = 2;
+                else if (row3[0] == 0)
+                    row3[0] = 2;
+                else
+                    row3[2] = 2;
+                isSecondMove = false;
             }
         }
         static void game() {
             print();
             while (endGame == false) {
                 bool isValid = true;
-                int row, column;
+                int row=0, column=0;
                 do
                 {
                     isValid = true;
                     Console.WriteLine("Enter a row");
-                    row = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter a column");
-                    column = int.Parse(Console.ReadLine());
-                    if (row > 3 || row < 1 || column > 3 || column < 1 || checkIsEmptyCell(row, column) == false)
+                    string input = Console.ReadLine();
+                    if (isValidNumber(input) == false || input.Length == 0 || int.Parse(input) > 3 || int.Parse(input)<1)
                     {
-                        Console.WriteLine("Invalid input or the cell alredy full please enter again");
+                        Console.WriteLine("Invalid input please enter again");
                         isValid = false;
+                        continue;
                     }
+                    row = int.Parse(input);
+                    Console.WriteLine("Enter a column");
+                    input = Console.ReadLine();
+                    if (isValidNumber(input) == false || input.Length == 0 || int.Parse(input) > 3 || int.Parse(input) < 1 || checkIsEmptyCell(row, int.Parse(input))==false )
+                    {
+                        Console.WriteLine("Invalid input or the cell is full please enter again");
+                        isValid = false;
+                        continue;
+                    }
+                    column = int.Parse(input);
                 } while(isValid == false);
                 switch (row) { 
                     case 1:
