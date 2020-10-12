@@ -381,12 +381,7 @@ namespace ConsoleApplication2
                 else if (row1[2] == 0) {
                     row1[2] = 2;
                 }
-                else if (row3[0] == 0) {
-                    row3[0] = 2;
-                }
-                else if (row3[2] == 0) {
-                    row3[2] = 2;
-                }
+                
             }else if (findGoodColumn() == -1 && findGoodRow() == -1 && findGoodRowPlayer() == -1 && findGoodColumnPlayer() == -1 && (countXDiagonal1() != 2 || findEmptyDiagonal1() == -1)
                 && (countODiagonal1() != 2 || findEmptyDiagonal1() == -1) && (countXDiagonal2() != 2 || findEmptyDiagonal2() == -1) && (countODiagonal2() != 2 || findEmptyDiagonal2() == -1))
             {
