@@ -390,10 +390,7 @@ namespace ConsoleApplication2
                         row1[2] = 2;
                 }
                 else {
-                    if (row1[1] == 0)
-                        row1[1] = 2;
-                    else if (row3[1] == 0)
-                        row3[1] = 2;
+                    row2[1] = 2;
                 }
                 
             }else if (findGoodColumn() == -1 && findGoodRow() == -1 && findGoodRowPlayer() == -1 && findGoodColumnPlayer() == -1 && (countXDiagonal1() != 2 || findEmptyDiagonal1() == -1)
@@ -564,7 +561,16 @@ namespace ConsoleApplication2
             }
             else if (isSecondMove == true)
             {
-                if (row1[0] == 0)
+                if (row2[1] == 2) {
+                    if (row1[1] == 0)
+                        row1[1] = 2;
+                    else if (row2[0] == 0)
+                        row2[0] = 2;
+                    else if (row2[2] == 0)
+                        row2[2] = 2;
+                    else if (row3[1] == 0)
+                        row3[1] = 2;
+                }else if (row1[0] == 0)
                     row1[0] = 2;
                 else if (row1[2] == 0)
                     row1[2] = 2;
