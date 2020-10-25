@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication2
+namespace ConsoleApplication1
 {
     class Program
     {
@@ -14,8 +14,10 @@ namespace ConsoleApplication2
         static bool endGame = false;
         static bool isFirstMove = true;
         static bool isSecondMove = true;
-        static void print(int n) {
-            switch (n) { 
+        static void print(int n)
+        {
+            switch (n)
+            {
                 case 0:
                     Console.Write(" -");
                     break;
@@ -27,21 +29,24 @@ namespace ConsoleApplication2
                     break;
             }
         }
-        static bool isValidNumber(string s) {
+        static bool isValidNumber(string s)
+        {
             for (int i = 0; i < s.Length; i++)
                 if (s[i] > '9' || s[i] < '0')
                     return false;
             return true;
         }
-        static void print(int[] arr) {
+        static void print(int[] arr)
+        {
             for (int i = 0; i < arr.Length; i++)
                 print(arr[i]);
             Console.WriteLine();
         }
-        static void print() {
+        static void print()
+        {
             Console.Write(" ");
-            for(int i=0;i<3;i++)
-                Console.Write(" "+(i+1));
+            for (int i = 0; i < 3; i++)
+                Console.Write(" " + (i + 1));
             Console.WriteLine();
             Console.Write("1");
             print(row1);
@@ -51,24 +56,28 @@ namespace ConsoleApplication2
             print(row3);
 
         }
-        static int generate() {
+        static int generate()
+        {
             return new Random().Next(1, 3);
         }
-        static bool checkFull(int []arr) {
+        static bool checkFull(int[] arr)
+        {
             for (int i = 0; i < arr.Length; i++)
                 if (arr[i] == 0)
                     return false;
             return true;
         }
-        static void checkWin() {
-            int countPlayer=0;
-            int countComputer=0;
+        static void checkWin()
+        {
+            int countPlayer = 0;
+            int countComputer = 0;
             for (int i = 0; i < 3; i++)
                 if (row1[i] == 1)
                     countPlayer++;
                 else if (row1[i] == 2)
                     countComputer++;
-            if (countPlayer == 3) {
+            if (countPlayer == 3)
+            {
                 Console.WriteLine("Player Win");
                 endGame = true;
                 return;
@@ -119,7 +128,7 @@ namespace ConsoleApplication2
             }
             countComputer = 0;
             countPlayer = 0;
-            countPlayer=((row1[0]==1)?1:0)+((row2[1]==1)?1:0)+((row3[2]==1)?1:0);
+            countPlayer = ((row1[0] == 1) ? 1 : 0) + ((row2[1] == 1) ? 1 : 0) + ((row3[2] == 1) ? 1 : 0);
             countComputer = ((row1[0] == 2) ? 1 : 0) + ((row2[1] == 2) ? 1 : 0) + ((row3[2] == 2) ? 1 : 0);
             if (countPlayer == 3)
             {
@@ -191,34 +200,40 @@ namespace ConsoleApplication2
                 endGame = true;
                 return;
             }
-            if (checkFull(row1) && checkFull(row2) && checkFull(row3)) {
+            if (checkFull(row1) && checkFull(row2) && checkFull(row3))
+            {
                 Console.WriteLine("Its a Draw");
                 endGame = true;
             }
         }
-        static bool checkIsEmptyCell(int row, int column) {
+        static bool checkIsEmptyCell(int row, int column)
+        {
             if (column < 1)
                 return false;
-            switch(row){
+            switch (row)
+            {
                 case 1:
-                    return row1[column-1] == 0;
+                    return row1[column - 1] == 0;
                 case 2:
-                    return row2[column-1] == 0;
+                    return row2[column - 1] == 0;
                 case 3:
-                    return row3[column-1] == 0;
+                    return row3[column - 1] == 0;
             }
             return false;
         }
-        static int getEmptyColumnInRow(int []arr) {
+        static int getEmptyColumnInRow(int[] arr)
+        {
             for (int i = 0; i < arr.Length; i++)
                 if (arr[i] == 0)
                     return 1 + i;
             return -1;
         }
-        static int getEmptyRow() { 
-            return getEmptyColumnInRow(row1)!=-1?1:(getEmptyColumnInRow(row2)!=-1)?2:(getEmptyColumnInRow(row3)!=-1)?3:1;
+        static int getEmptyRow()
+        {
+            return getEmptyColumnInRow(row1) != -1 ? 1 : (getEmptyColumnInRow(row2) != -1) ? 2 : (getEmptyColumnInRow(row3) != -1) ? 3 : 1;
         }
-        static void computerTurnRandom() {
+        static void computerTurnRandom()
+        {
             bool isValid;
             int row, column;
             int countTry = 0;
@@ -265,27 +280,32 @@ namespace ConsoleApplication2
                     break;
             }
         }
-        static int countORow(int []arr) {
+        static int countORow(int[] arr)
+        {
             int count = 0;
             for (int i = 0; i < arr.Length; i++)
                 if (arr[i] == 1)
                     count++;
             return count;
         }
-        static int countXRow(int []arr) {
+        static int countXRow(int[] arr)
+        {
             int count = 0;
             for (int i = 0; i < arr.Length; i++)
                 if (arr[i] == 2)
                     count++;
             return count;
         }
-        static int countOColumnsRow(int n) {
+        static int countOColumnsRow(int n)
+        {
             return (row1[n - 1] == 1 ? 1 : 0) + (row2[n - 1] == 1 ? 1 : 0) + (row3[n - 1] == 1 ? 1 : 0);
         }
-        static int countXColumnsRow(int n) { 
-            return (row1[n-1]==2?1:0)+(row2[n-1]==2?1:0)+(row3[n-1]==2?1:0);
+        static int countXColumnsRow(int n)
+        {
+            return (row1[n - 1] == 2 ? 1 : 0) + (row2[n - 1] == 2 ? 1 : 0) + (row3[n - 1] == 2 ? 1 : 0);
         }
-        static int getEmptyRowInColumn(int n) {
+        static int getEmptyRowInColumn(int n)
+        {
             if (row1[n - 1] == 0)
                 return 1;
             if (row2[n - 1] == 0)
@@ -294,7 +314,8 @@ namespace ConsoleApplication2
                 return 3;
             return -1;
         }
-        static int findGoodRowPlayer() {
+        static int findGoodRowPlayer()
+        {
             int countR1, countR2, countR3;
             countR1 = countORow(row1);
             countR2 = countORow(row2);
@@ -307,7 +328,8 @@ namespace ConsoleApplication2
                 return 3;
             return -1;
         }
-        static int findGoodRow() {
+        static int findGoodRow()
+        {
             int countR1, countR2, countR3;
             countR1 = countXRow(row1);
             countR2 = countXRow(row2);
@@ -320,7 +342,8 @@ namespace ConsoleApplication2
                 return 3;
             return -1;
         }
-        static int findGoodColumnPlayer() {
+        static int findGoodColumnPlayer()
+        {
             int col1, col2, col3;
             col1 = countOColumnsRow(1);
             col2 = countOColumnsRow(2);
@@ -333,7 +356,8 @@ namespace ConsoleApplication2
                 return 3;
             return -1;
         }
-        static int findGoodColumn() {
+        static int findGoodColumn()
+        {
             int col1, col2, col3;
             col1 = countXColumnsRow(1);
             col2 = countXColumnsRow(2);
@@ -346,8 +370,9 @@ namespace ConsoleApplication2
                 return 3;
             return -1;
         }
-        static int countXDiagonal1() { 
-            return (row1[0]==1?1:0)+(row2[1]==1?1:0)+(row3[2]==1?1:0);
+        static int countXDiagonal1()
+        {
+            return (row1[0] == 1 ? 1 : 0) + (row2[1] == 1 ? 1 : 0) + (row3[2] == 1 ? 1 : 0);
         }
         static int countODiagonal1()
         {
@@ -357,10 +382,12 @@ namespace ConsoleApplication2
         {
             return (row1[2] == 2 ? 1 : 0) + (row2[1] == 2 ? 1 : 0) + (row3[0] == 2 ? 1 : 0);
         }
-        static int countXDiagonal2() { 
-            return (row1[2]==1?1:0)+(row2[1]==1?1:0)+(row3[0]==1?1:0);
+        static int countXDiagonal2()
+        {
+            return (row1[2] == 1 ? 1 : 0) + (row2[1] == 1 ? 1 : 0) + (row3[0] == 1 ? 1 : 0);
         }
-        static int findEmptyDiagonal1() {
+        static int findEmptyDiagonal1()
+        {
             if (row1[0] == 0)
                 return 1;
             if (row2[1] == 0)
@@ -369,7 +396,8 @@ namespace ConsoleApplication2
                 return 3;
             return -1;
         }
-        static int findEmptyDiagonal2() {
+        static int findEmptyDiagonal2()
+        {
             if (row1[2] == 0)
                 return 1;
             if (row2[1] == 0)
@@ -380,7 +408,8 @@ namespace ConsoleApplication2
         }
         static void computerTurnSmart()
         {
-            if (isFirstMove) {
+            if (isFirstMove)
+            {
                 isFirstMove = false;
                 if (row2[1] == 1)
                 {
@@ -389,12 +418,14 @@ namespace ConsoleApplication2
                     else if (row1[2] == 0)
                         row1[2] = 2;
                 }
-                else {
+                else
+                {
                     row2[1] = 2;
                 }
-                
-            }else if (findGoodColumn() == -1 && findGoodRow() == -1 && findGoodRowPlayer() == -1 && findGoodColumnPlayer() == -1 && (countXDiagonal1() != 2 || findEmptyDiagonal1() == -1)
-                && (countODiagonal1() != 2 || findEmptyDiagonal1() == -1) && (countXDiagonal2() != 2 || findEmptyDiagonal2() == -1) && (countODiagonal2() != 2 || findEmptyDiagonal2() == -1)&&isSecondMove==false)
+
+            }
+            else if (findGoodColumn() == -1 && findGoodRow() == -1 && findGoodRowPlayer() == -1 && findGoodColumnPlayer() == -1 && (countXDiagonal1() != 2 || findEmptyDiagonal1() == -1)
+               && (countODiagonal1() != 2 || findEmptyDiagonal1() == -1) && (countXDiagonal2() != 2 || findEmptyDiagonal2() == -1) && (countODiagonal2() != 2 || findEmptyDiagonal2() == -1) && isSecondMove == false)
             {
                 computerTurnRandom();
             }
@@ -420,7 +451,7 @@ namespace ConsoleApplication2
                             column = getEmptyColumnInRow(row3);
                             break;
                     }
-                    
+
                 }
                 else
                 {
@@ -561,7 +592,8 @@ namespace ConsoleApplication2
             }
             else if (isSecondMove == true)
             {
-                if (row2[1] == 2) {
+                if (row2[1] == 2&&(row1[0]==1&&row3[2]==1||row1[2]==1&&row3[0]==1) )
+                {
                     if (row1[1] == 0)
                         row1[1] = 2;
                     else if (row2[0] == 0)
@@ -570,28 +602,40 @@ namespace ConsoleApplication2
                         row2[2] = 2;
                     else if (row3[1] == 0)
                         row3[1] = 2;
-                }else if (row1[0] == 0)
-                    row1[0] = 2;
-                else if (row1[2] == 0)
-                    row1[2] = 2;
-                else if (row3[0] == 0)
-                    row3[0] = 2;
-                else
-                    row3[2] = 2;
+                }else{
+                    if (row1[0] == 0&&(row1[1]==1||row2[0]==1))
+                        row1[0] = 2;
+                    else if (row1[2] == 0&&(row1[1] == 1 || row2[2] == 1))
+                        row1[2] = 2;
+                    else if (row3[0] == 0 && (row2[0] == 1 || row3[1] == 1))
+                        row3[0] = 2;
+                    else if (row3[2] == 0 && (row3[1] == 1 || row2[2] == 1))
+                        row3[2] = 2;
+                     else if (row1[0] == 0)
+                            row1[0] = 2;
+                     else if (row1[2] == 0)
+                         row1[2] = 2;
+                     else if (row3[0] == 0)
+                        row3[0] = 2;
+                     else if(row3[2]==0)
+                        row3[2] = 2;
+                }
                 isSecondMove = false;
             }
         }
-        static void game() {
+        static void game()
+        {
             print();
-            while (endGame == false) {
+            while (endGame == false)
+            {
                 bool isValid = true;
-                int row=0, column=0;
+                int row = 0, column = 0;
                 do
                 {
                     isValid = true;
                     Console.WriteLine("Enter a row");
                     string input = Console.ReadLine();
-                    if (isValidNumber(input) == false || input.Length == 0 || int.Parse(input) > 3 || int.Parse(input)<1)
+                    if (isValidNumber(input) == false || input.Length == 0 || int.Parse(input) > 3 || int.Parse(input) < 1)
                     {
                         Console.WriteLine("Invalid input please enter again");
                         isValid = false;
@@ -600,25 +644,26 @@ namespace ConsoleApplication2
                     row = int.Parse(input);
                     Console.WriteLine("Enter a column");
                     input = Console.ReadLine();
-                    if (isValidNumber(input) == false || input.Length == 0 || int.Parse(input) > 3 || int.Parse(input) < 1 || checkIsEmptyCell(row, int.Parse(input))==false )
+                    if (isValidNumber(input) == false || input.Length == 0 || int.Parse(input) > 3 || int.Parse(input) < 1 || checkIsEmptyCell(row, int.Parse(input)) == false)
                     {
                         Console.WriteLine("Invalid input or the cell is full please enter again");
                         isValid = false;
                         continue;
                     }
                     column = int.Parse(input);
-                } while(isValid == false);
-                switch (row) { 
+                } while (isValid == false);
+                switch (row)
+                {
                     case 1:
-                        row1[column-1] = 1;
+                        row1[column - 1] = 1;
                         break;
                     case 2:
-                        row2[column-1] = 1;
+                        row2[column - 1] = 1;
                         break;
                     case 3:
-                        row3[column-1] = 1;
+                        row3[column - 1] = 1;
                         break;
-                } 
+                }
                 Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 print();
                 checkWin();
@@ -634,7 +679,7 @@ namespace ConsoleApplication2
         static void Main(string[] args)
         {
             game();
-            
+
             Console.ReadLine();
         }
     }
